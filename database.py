@@ -27,7 +27,7 @@ def init_db(db_name: str = DB_NAME) -> None:
             );
         """)
 
-        # Table 2: courses
+
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS courses (
                 course_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -36,7 +36,7 @@ def init_db(db_name: str = DB_NAME) -> None:
             );
         """)
 
-        # Table 3: Many-To-Many linking table
+
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS student_courses (
                 student_id INTEGER NOT NULL,
@@ -51,10 +51,8 @@ def init_db(db_name: str = DB_NAME) -> None:
         conn.close()
 
 
-# --- Student Operations ---
 
 def add_student(name: str, age: int, major: str, db_name: str = DB_NAME) -> int:
-    """Add a new student."""
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -69,7 +67,6 @@ def add_student(name: str, age: int, major: str, db_name: str = DB_NAME) -> int:
 
 
 def get_all_students(db_name: str = DB_NAME) -> List[Dict[str, Any]]:
-    """Retrieve all students."""
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -81,7 +78,6 @@ def get_all_students(db_name: str = DB_NAME) -> List[Dict[str, Any]]:
 
 
 def get_student_by_id(student_id: int, db_name: str = DB_NAME) -> Optional[Dict[str, Any]]:
-    """Retrieve student by ID."""
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -93,7 +89,6 @@ def get_student_by_id(student_id: int, db_name: str = DB_NAME) -> Optional[Dict[
 
 
 def update_student(student_id: int, name: str, age: int, major: str, db_name: str = DB_NAME) -> bool:
-    """Update existing student info."""
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -108,7 +103,6 @@ def update_student(student_id: int, name: str, age: int, major: str, db_name: st
 
 
 def delete_student(student_id: int, db_name: str = DB_NAME) -> bool:
-    """Delete student by ID."""
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -119,10 +113,10 @@ def delete_student(student_id: int, db_name: str = DB_NAME) -> bool:
         conn.close()
 
 
-# --- Course Operations ---
+
 
 def add_course(course_name: str, instructor: str, db_name: str = DB_NAME) -> int:
-    """Add a new course."""
+
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -137,7 +131,7 @@ def add_course(course_name: str, instructor: str, db_name: str = DB_NAME) -> int
 
 
 def get_all_courses(db_name: str = DB_NAME) -> List[Dict[str, Any]]:
-    """Retrieve all courses."""
+
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -149,7 +143,7 @@ def get_all_courses(db_name: str = DB_NAME) -> List[Dict[str, Any]]:
 
 
 def get_course_by_id(course_id: int, db_name: str = DB_NAME) -> Optional[Dict[str, Any]]:
-    """Retrieve course by ID."""
+
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -161,7 +155,7 @@ def get_course_by_id(course_id: int, db_name: str = DB_NAME) -> Optional[Dict[st
 
 
 def update_course(course_id: int, course_name: str, instructor: str, db_name: str = DB_NAME) -> bool:
-    """Update existing course info."""
+
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -176,7 +170,7 @@ def update_course(course_id: int, course_name: str, instructor: str, db_name: st
 
 
 def delete_course(course_id: int, db_name: str = DB_NAME) -> bool:
-    """Delete course by ID."""
+
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -187,10 +181,9 @@ def delete_course(course_id: int, db_name: str = DB_NAME) -> bool:
         conn.close()
 
 
-# --- Enrollment Operations (Many-To-Many) ---
 
 def enroll_student(student_id: int, course_id: int, db_name: str = DB_NAME) -> bool:
-    """Enroll a student in a course."""
+
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -207,7 +200,7 @@ def enroll_student(student_id: int, course_id: int, db_name: str = DB_NAME) -> b
 
 
 def unenroll_student(student_id: int, course_id: int, db_name: str = DB_NAME) -> bool:
-    """Remove student enrollment from a course."""
+
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -222,7 +215,7 @@ def unenroll_student(student_id: int, course_id: int, db_name: str = DB_NAME) ->
 
 
 def get_students_in_course(course_id: int, db_name: str = DB_NAME) -> List[Dict[str, Any]]:
-    """Get all students registered for a specific course using SQL JOIN query."""
+
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -240,7 +233,7 @@ def get_students_in_course(course_id: int, db_name: str = DB_NAME) -> List[Dict[
 
 
 def get_courses_for_student(student_id: int, db_name: str = DB_NAME) -> List[Dict[str, Any]]:
-    """Get all courses a student is enrolled in using SQL JOIN query."""
+
     conn = get_connection(db_name)
     try:
         cursor = conn.cursor()
@@ -258,7 +251,7 @@ def get_courses_for_student(student_id: int, db_name: str = DB_NAME) -> List[Dic
 
 
 def seed_sample_data(db_name: str = DB_NAME) -> None:
-    """Populate database with sample initial data if empty."""
+
     if get_all_students(db_name) or get_all_courses(db_name):
         return
 

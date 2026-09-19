@@ -3,7 +3,7 @@ import database
 
 
 def print_table(headers: list[str], rows: list[list]) -> None:
-    """Print a clean formatted ascii table."""
+
     if not rows:
         print("  (Записів не знайдено / Таблиця порожня)")
         return
@@ -211,7 +211,6 @@ def view_student_courses_ui():
 
 def main():
     database.init_db()
-    # Populate with sample initial data if DB is empty
     database.seed_sample_data()
 
     while True:
