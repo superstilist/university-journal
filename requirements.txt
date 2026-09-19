@@ -1,0 +1,2 @@
+# Standard library built-ins are used for SQLite and CLI interface.
+# Additional dependencies can be added here if needed.
